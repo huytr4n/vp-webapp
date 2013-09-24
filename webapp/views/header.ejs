@@ -1,0 +1,61 @@
+<%
+	var onpage = 'home';
+	if(locals.page){
+		onpage = page;
+	}	
+%>
+<link href="/stylesheets/header.css" rel="stylesheet" media="screen">
+<header class="navbar navbar-inverse navbar-fixed-top bs-docs-nav" role="banner">
+    <div class="container">
+	    <div class="navbar-header">
+	        <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
+		        <span class="sr-only">Toggle navigation</span>
+		        <span class="icon-bar"></span>
+		        <span class="icon-bar"></span>
+		        <span class="icon-bar"></span>
+	        </button>
+	        <a href="/" class="navbar-brand">Homepage</a>
+	    </div>
+	    <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
+	        <ul class="nav navbar-nav">		        	     	
+		        <li id='page-manage'>
+		            <a href="/product/add">Product</a>
+		        </li>
+		        <li id='page-upload'>
+		            <a href="/uploads">Uploads</a>
+		        </li>		       
+	        </ul>
+	    </nav>
+    </div>
+</header>
+<div class="bs-header" id="content">
+    <div class="container">
+	    <h1>Getting started</h1>
+	    <p>An overview of Bootstrap.</p>	    
+    </div>
+</div>
+<div class="bs-old-docs">
+  <div class="container">
+    <strong>
+      <a href="../2.3.2/">Looking for Bootstrap 2.3.2 docs?</a>
+    </strong>   
+  </div>
+</div>
+<script type="text/javascript">
+	$(document).ready(function(){		
+		setActiveTopMenu();
+	});
+	// function set active for top menu
+	function setActiveTopMenu() {
+		var page = '<%=onpage%>';		
+		if(page) {
+			if ( page === 'home' ) {
+				$('#page-manage').addClass('active');
+			} else if ( page === 'uploads' ) {
+				$('#page-upload').addClass('active');
+			} else {
+				
+			}
+		}
+	}
+</script>
