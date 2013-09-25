@@ -37,3 +37,6 @@ app.get('/', function (req, res) {
 // admin routing
 var admin_route = require('./routes/admin');
 admin_route.route(app, null);
+
+var admin_product_route = require('./routes/product');
+admin_product_route.route(app, null);

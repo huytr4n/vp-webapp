@@ -23,6 +23,10 @@ var product_schema = new Schema({
 			'name' : String,
 			'id' : String
 		},
+		'HDD' : {
+			'name' : String,
+			'id' : String
+		},
 		'other' : String		
 	},
 	'price' : {
