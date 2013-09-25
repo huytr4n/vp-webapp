@@ -3,9 +3,7 @@ var Schema = mongoose.Schema;
 
 // product Schema
 var product_schema = new Schema({
-	'title' : {
-		'type' : String
-	},
+	'title' : String,
 	'catalog' : String,
 	'outline' : String,
 	'image' : {
@@ -41,7 +39,8 @@ var product_schema = new Schema({
 	}
 });
 
-var Product = mongoose.model('product', product_schema, 'product');
+// validate
 
-var p = new Product({});
-console.log(p);
+var Product = mongoose.model('Product', product_schema, 'product');
+
+exports.Product = Product;
