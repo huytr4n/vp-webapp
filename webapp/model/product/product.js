@@ -3,7 +3,9 @@
 */
 var Product = require('./../model').Product;
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/test');
+var dbConnect = require('./../db/connect');
+var dbLink = dbConnect.getLink();
+mongoose.connect(dbLink);
 /**
 * Provides some mathematical functions
 *
