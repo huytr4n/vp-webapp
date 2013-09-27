@@ -1,0 +1,28 @@
+<script src="/clients/product.js"></script>
+<html ng-app>
+	<div class="panel panel-primary" ng-controller="ViewCtrl">
+		<div class="panel-heading">
+			<h3 class="panel-title">Products</h3>
+		</div>
+		<div class="panel-body">
+			<table class='table'>
+				<thead>
+					<tr>
+						<th>Title</th>
+						<th>Outline</th>
+						<th>Edit</th>
+						<th>Destroy</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="p in products">          
+				      <td>{{p.title}}</td>
+				      <td>{{p.outline}}</td>
+				      <td><a href="/admin/product/edit/{{p._id}}">Edit</a></td>
+				      <td><a href="" ng-click="destroy(p._id)" >Destroy</a></td>
+				    </tr>
+				</tbody>		
+			</table>
+		</div>		
+	</div>
+</html>

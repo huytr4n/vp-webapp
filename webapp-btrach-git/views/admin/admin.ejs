@@ -1,0 +1,30 @@
+<% include ./../index %>
+<div class='container bs-docs-container'>
+	<div class='row'>
+		<div class='col-md-3'>
+			<div class="bs-sidebar hidden-print affix-top" role="complementary">
+				<ul>
+					<li><a href="/admin/product/add">Add</a></li>					
+					<li><a href="/admin/product/">View</a></li>
+				</ul>
+       		</div>
+		</div>
+		<div class='col-md-9' role='main'>
+			<%
+				if (locals.section) {
+					if (section === 'product') {
+						if (locals.page && page === 'add') {
+							%><% include product/add %><%
+						} else if (locals.page && page === 'edit') {
+							%><% include product/edit %><%
+						} else {
+							%><% include product/manage %><%
+						}	
+					} else if (section === 'db') {
+						%><% include db/view %><%
+					}
+				}				
+			%>
+		</div>
+	</div>
+</div>
