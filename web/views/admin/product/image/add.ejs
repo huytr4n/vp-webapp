@@ -1,0 +1,25 @@
+<%
+	if(locals.id) {
+		%>
+			<div>
+				<form method="post" action="/admin/product/image/upload/<%=id%>" enctype="multipart/form-data">
+					<table>
+						<tbody>
+							<tr>
+								<td><input style="display:none;" name="id" value=<%=id%> ></td>
+							</tr>
+							<tr>
+								<td>Choose image: </td>
+								<td><input type="file" name="image"></td>
+								<td></td>
+							</tr>
+							<tr>
+								<td><input type="submit" value="upload" ></td>
+							</tr>
+						</tbody>
+					</table>
+				</form>	
+			</div>
+		<%
+	}
+%>

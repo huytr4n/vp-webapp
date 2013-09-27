@@ -4,6 +4,7 @@
 var Product = require('./../model/product/product');
 
 var options = require('./options').options;
+var fs = require('fs');
 
 function route (app, xp) {
 /*
@@ -41,6 +42,33 @@ function route (app, xp) {
 		});
 		res.render('./admin/admin', opt);
 	});
+
+	// POST add product
+	app.post('/admin/product/add', preAddProduct, function (req, res) {
+		var p = Product.create(req.product);
+		Product.add(p, function (err, success) {			
+			var result = "";
+			if (err) {
+				result = "false";
+			} else {
+				result = "true";
+			}
+			res.redirect("/admin/product/add?result=" + result);
+		});
+	});
+	// GET add image for produt page
+	app.get("/admin/product/image/upload/:id", function (req, res) {
+		var id = req.params.id;
+		// render view
+		var opt = options({
+			'site' : 'private',
+			'section' : 'product',
+			'page' : 'image-add'
+		});
+		// add id to param
+		opt.id = id;
+		res.render('./admin/admin', opt);
+	});
 /*
 *********** API ***************
 */
@@ -61,19 +89,7 @@ function route (app, xp) {
 		Product.getById(id, function (p) {
 			res.send(p);
 		});
-	});
-
-	// POST add product
-	app.post('/admin/product/add', preAddProduct, function (req, res) {
-		var p = Product.create(req.product);
-		Product.add(p, function (err, success) {
-			if (err) {
-				res.send(false);
-			} else {
-				res.send(true);
-			}
-		});
-	});
+	});	
 
 	// GET destroy product by id
 	app.get('/admin/product/destroy/:id', function (req, res) {
@@ -85,9 +101,23 @@ function route (app, xp) {
 			res.send({code: 400, errorMsg : "id is invalid"});
 		}
 	});
+	// POST upload image
+	app.post('/admin/product/image/upload/:id', function (req, res) {
+		var id = req.params.id;
+		// set upload path
+		var writePath = "./public/product-images/"+id;
+		// create folder if it's not existed
+		if (!fs.lstatSync(writePath).isDirectory()) {
+			fs.mkdirSync("./public/product-images/"+id);
+		}	
+		var newPath = writePath + "/" + req.files.image.name;
+		upload(req.files.image, newPath);
+		res.redirect("/admin/product");
+	});
 };
+
 // prepare parameter
-var preAddProduct = function (req, res, next) {	
+var preAddProduct = function (req, res, next) {
 	var product = {
 		'title' : req.body.title,
 		'catalog' : req.body.catalog,
@@ -122,6 +152,19 @@ var preAddProduct = function (req, res, next) {
 	};
 	req.product = product;
 	next();
+};
+// upload image
+var upload = function (file, path) {
+	fs.readFile(file.path, function (err, data) {		
+		// write file
+		fs.writeFile(path, data, function (err) {
+			if (err) {
+				console.log(err);
+			} else {
+				console.log("upload file complete : " +path);
+			}		
+		});
+	});
 };
 
 exports.route = route;

@@ -1,7 +1,7 @@
 <%
-	var onpage = 'home';
-	if(locals.page){
-		onpage = page;
+	var page = 'home';
+	if(locals.section){
+		page = section;
 	}	
 %>
 <link href="/stylesheets/header.css" rel="stylesheet" media="screen">
@@ -19,10 +19,10 @@
 	    <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
 	        <ul class="nav navbar-nav">		        	     	
 		        <li id='page-manage'>
-		            <a href="/product/add">Product</a>
+		            <a href="/admin/product/">Product</a>
 		        </li>
-		        <li id='page-upload'>
-		            <a href="/uploads">Uploads</a>
+		        <li id='page-admin'>
+		            <a href="/admin/">Admin</a>
 		        </li>		       
 	        </ul>
 	    </nav>
@@ -30,15 +30,12 @@
 </header>
 <div class="bs-header" id="content">
     <div class="container">
-	    <h1>Getting started</h1>
-	    <p>An overview of Bootstrap.</p>	    
+	    <h1>Admin page</h1>
+	    <p>This is the prototype</p>	    
     </div>
 </div>
 <div class="bs-old-docs">
-  <div class="container">
-    <strong>
-      <a href="../2.3.2/">Looking for Bootstrap 2.3.2 docs?</a>
-    </strong>   
+  <div class="container">      
   </div>
 </div>
 <script type="text/javascript">
@@ -47,12 +44,12 @@
 	});
 	// function set active for top menu
 	function setActiveTopMenu() {
-		var page = '<%=onpage%>';		
-		if(page) {
-			if ( page === 'home' ) {
+		var onpage = '<%=page%>';		
+		if(onpage) {
+			if ( onpage === 'product' ) {
 				$('#page-manage').addClass('active');
-			} else if ( page === 'uploads' ) {
-				$('#page-upload').addClass('active');
+			} else if ( onpage === 'admin' ) {
+				$('#page-admin').addClass('active');
 			} else {
 				
 			}

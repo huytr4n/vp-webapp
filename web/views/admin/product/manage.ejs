@@ -1,4 +1,4 @@
-<script src="/clients/product.js"></script>
+<script src="/controllers/admin/product.js"></script>
 <html ng-app>
 	<div class="panel panel-primary" ng-controller="ViewCtrl">
 		<div class="panel-heading">
@@ -12,14 +12,16 @@
 						<th>Outline</th>
 						<th>Edit</th>
 						<th>Destroy</th>
+						<th>Image</th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr ng-repeat="p in products">          
 				      <td>{{p.title}}</td>
 				      <td>{{p.outline}}</td>
-				      <td><a href="/admin/product/edit/{{p._id}}">Edit</a></td>
-				      <td><a href="" ng-click="destroy(p._id)" >Destroy</a></td>
+				      <td><a href="/admin/product/edit/{{p._id}}"><span class="glyphicon glyphicon-pencil"></span></a></td>
+				      <td><a href="" ng-click="destroy(p._id)" ><span class="glyphicon glyphicon-remove-circle"></span></a></td>
+				      <td><a href="/admin/product/image/upload/{{p._id}}"><span class="glyphicon glyphicon-picture"></span></a></td>
 				    </tr>
 				</tbody>		
 			</table>

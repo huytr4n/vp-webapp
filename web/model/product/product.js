@@ -4,9 +4,26 @@
 var Product = require('./../model').Product;
 var mongoose = require('mongoose');
 var dbConnect = require('./../db/connect');
+
 var dbLink = dbConnect.getLink();
+
 console.log(dbLink);
-mongoose.connect(dbLink);
+
+var options = {
+	server:{
+		auto_reconnect: true,
+		poolSize: 10,
+		socketOptions:{
+			keepAlive: 1
+		}
+	},
+	db: {
+		numberOfRetries: 10,
+		retryMiliSeconds: 1000
+	}
+};
+var db = mongoose.connect(dbLink, options);
+
 /**
 * Provides some mathematical functions
 *
